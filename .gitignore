@@ -1,0 +1,12 @@
+# Local dependency installs and diagnostic output
+node_modules/
+npm-debug.log*
+*.log
+coverage/
+.DS_Store
+
+# Project-local Pi package settings and installed package cache
+.pi/
+
+# TypeScript build cache
+*.tsbuildinfo
