@@ -11,5 +11,6 @@
     "types": ["node"],
     "allowImportingTsExtensions": true
   },
-  "include": ["extensions/**/*.ts", "types/**/*.d.ts"]
+  "include": ["extensions/**/*.ts", "types/**/*.d.ts"],
+  "exclude": ["extensions/pi-mcp-adapter/**"]
 }

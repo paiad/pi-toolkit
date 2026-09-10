@@ -13,7 +13,8 @@
   "pi": {
     "extensions": [
       "extensions/session-search/index.ts",
-      "extensions/pi-mem/index.ts"
+      "extensions/pi-mem/index.ts",
+      "extensions/pi-mcp-adapter/index.ts"
     ],
     "skills": [
       "./skills"

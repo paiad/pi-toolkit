@@ -10,3 +10,7 @@ coverage/
 
 # TypeScript build cache
 *.tsbuildinfo
+
+# Generated and documentation-only assets from the vendored MCP adapter
+/extensions/pi-mcp-adapter/dist/
+/extensions/pi-mcp-adapter/*.png
