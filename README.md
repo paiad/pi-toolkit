@@ -1,53 +1,43 @@
 # Pi toolkit
 
-个人 Pi package，集中维护可复用的 Pi extensions 与 skills。当前注册 `session_search` 与项目级 `pi-mem`；`grilling` 与 `writing-for-agents` 作为 skills 提供。其他 extension 源码暂不随 package 加载。
+English · [简体中文](README.zh.md)
 
-## 安装
+A personal Pi package — reusable Pi extensions and skills, kept in one place, loaded on demand.
 
-仅在当前项目启用（推荐）：
+## For AI agents
 
-```sh
-pi install -l git:github.com/paiad/pi-toolkit
-```
+Everything lives in this repo and is declared in the root [`package.json`](package.json): a new tool or skill only takes effect once it is listed in `pi.extensions` / `pi.skills` — dropping source into a directory loads nothing.
 
-本地开发：clone 后用相对路径安装，例如在仓库父目录执行 `pi install ./pi-toolkit`。
+- Verify: `npm ci && npm run typecheck && npm test`. Tests are pinned to the local devDependency `@earendil-works/pi-coding-agent@0.85.1` and do not rely on a globally installed Pi; set `PI_CODING_AGENT_BIN` to smoke test with another Pi CLI.
+- Load this package in another project: `pi install -l git:github.com/paiad/pi-toolkit`.
+- Ask the user before installing dependencies, deleting files, or running a full build.
+- The guidelines in `AGENTS.md` are taken verbatim from [andrej-karpathy-skills' CLAUDE.md](https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CLAUDE.md) (identical apart from the title line).
 
-本地安装保存 package 路径，Pi 重启后加载该路径上的最新源码。更新 package 后运行 `npm test`，重启 Pi，并在工具列表中确认每个工具只注册一次。
-
-## 开发与测试
-
-项目测试固定使用 `@earendil-works/pi-coding-agent@0.85.1` 的本地 devDependency，不依赖机器全局安装的 Pi。运行：
-
-```sh
-npm ci
-npm run typecheck
-npm test
-```
-
-需要用另一个 Pi CLI 做 smoke test 时，可设置 `PI_CODING_AGENT_BIN` 为该可执行文件路径。CI 在 Windows、Linux、macOS 的 Node 22.19.x 与 Node 24.x 上运行相同检查。
-
-## 资源
+## Resources
 
 ### Tools
 
-| 工具 | 用途 |
+| Tool | Purpose |
 | --- | --- |
-| [session search](extensions/session-search/README.md)（入参与返回见 [docs/session-search.md](docs/session-search.md)） | 检索历史 Pi session，恢复上下文 |
-| [pi-mem](extensions/pi-mem/README.md) | 项目私有的长期记忆、日志、scratchpad 与可选 qmd 搜索 |
+| [session search](extensions/session-search/README.md) (parameters and results: [docs/session-search.md](docs/session-search.md)) | Search past Pi sessions to recover context |
+| [pi-mem](extensions/pi-mem/README.md) (derived from [jayzeng/pi-memory](https://github.com/jayzeng/pi-memory)) | Project-private long-term memory, daily log, scratchpad, and optional qmd search |
+| [pi-mcp-adapter](extensions/pi-mcp-adapter/README.md) (upstream [nicobailon/pi-mcp-adapter](https://github.com/nicobailon/pi-mcp-adapter) v2.32.1, MIT) | Reach MCP servers on demand through a single `mcp` gateway, keeping tool definitions out of context; use `mcpScript` for batching |
+
+MCP config is read from project-level `.mcp.json` and global `~/.config/mcp/mcp.json` (also `~/.agents/mcp.json`); run `/mcp setup` on first use to import existing Cursor / Claude Code / Codex configs.
 
 ### Optional project package
 
 | Package | Purpose |
 | --- | --- |
-| [pi-web-access 集成](docs/pi-web-access.md) | 在当前 Pi project scope 中加载网页搜索与内容读取工具 |
+| [pi-web-access integration](docs/pi-web-access.md) (upstream [nicobailon/pi-web-access](https://github.com/nicobailon/pi-web-access)) | Load web search and content fetching tools in the current Pi project scope |
 
 ### Skills
 
-| Skill | 用途 |
+| Skill | Purpose |
 | --- | --- |
-| [grilling](skills/grilling/SKILL.md) | 拷问计划与决策，多轮收敛共识 |
-| [writing-for-agents](skills/writing-for-agents/SKILL.md) | 写给 agent 看的文档（skill、AGENTS.md）的写法 |
+| [grilling](skills/grilling/SKILL.md) | Interrogate a plan or decision until it converges |
+| [writing-for-agents](skills/writing-for-agents/SKILL.md) | How to write documents an agent consumes (skills, `AGENTS.md`) |
 
-每个 extension 位于 `extensions/<name>/index.ts`，并在根 `package.json` 的 `pi.extensions` 中声明。每个 skill 位于 `skills/<name>/SKILL.md`，并在根 `package.json` 的 `pi.skills` 中声明。测试随 extension 存放，统一由 `npm test` 运行。
+> `extensions/pi-mcp-adapter/skills/mcp-scripting/` is a skill shipped by that adapter, but the root `pi.skills` only declares `./skills`, so it is not currently in the available skill list.
 
-<sub>grilling 与 writing-for-agents 源自 [mattpocock/skills](https://github.com/mattpocock/skills)（[grilling](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling) 上游 08-20 · [writing-for-agents](https://github.com/mattpocock/skills/tree/main/skills/productivity/writing-for-agents) 上游 08-21）。</sub>
+<sub>grilling and writing-for-agents come from [mattpocock/skills](https://github.com/mattpocock/skills) ([grilling](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling) upstream 08-20 · [writing-for-agents](https://github.com/mattpocock/skills/tree/main/skills/productivity/writing-for-agents) upstream 08-21).</sub>
