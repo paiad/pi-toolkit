@@ -25,16 +25,11 @@ Everything lives in this repo and is declared in the root [`package.json`](packa
 
 MCP config is read from project-level `.mcp.json` and global `~/.config/mcp/mcp.json` (also `~/.agents/mcp.json`); run `/mcp setup` on first use to import existing Cursor / Claude Code / Codex configs.
 
-### Optional project package
+### Global packages
 
 | Package | Purpose |
 | --- | --- |
-| [pi-web-access integration](docs/pi-web-access.md) (upstream [nicobailon/pi-web-access](https://github.com/nicobailon/pi-web-access)) | Load web search and content fetching tools in the current Pi project scope |
-
-### Global package
-
-| Package | Purpose |
-| --- | --- |
+| [pi-web-access integration](docs/pi-web-access.md) (upstream [nicobailon/pi-web-access](https://github.com/nicobailon/pi-web-access)) | Load web search, content fetching and source checking tools in every project |
 | [open-tui configuration](docs/open-tui.md) (upstream [OldSuns/pi-open-tui](https://github.com/OldSuns/pi-open-tui) v0.3.5) | Header, footer, framed editor and per-turn telemetry for the Pi TUI; every option lives in `~/.pi/agent/open-tui.json` |
 
 ### Skills

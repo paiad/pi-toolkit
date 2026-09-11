@@ -1,24 +1,26 @@
 # pi-web-access 项目集成
 
-`pi-web-access` 是提供 `web_search` 与 `fetch_content` 的外部 Pi package。它只在当前项目安装；本仓库 `package.json` 声明的 extension 仍只有 `session_search`。
+`pi-web-access` 是提供 `web_search` 与 `fetch_content` 的外部 Pi package，作为**全局** package 安装，对所有项目生效；本仓库 `package.json` 声明的 extension 是 `session-search`、`pi-mem` 与 `pi-mcp-adapter`。
 
 各 provider 的字段与限制以上游配置文档为准：<https://github.com/nicobailon/pi-web-access#configuration>。
 
 ## 安装与验证
 
-在仓库根目录执行，将 package 写入项目的 Pi 设置：
-
-```powershell
-pi install -l npm:pi-web-access --approve
+```bash
+pi install npm:pi-web-access
 ```
 
-完成标准：`.pi/settings.json` 同时列出本地 toolkit 路径与 `"npm:pi-web-access"`。从本仓库重启 Pi 后，确认可用工具包含 `session_search`、`web_search` 与 `fetch_content`。
+不带 `-l` 即写入用户设置 `~/.pi/agent/settings.json`，装到 `~/.pi/agent/npm/`。完成标准：`pi list` 在 `User packages` 下显示 `npm:pi-web-access`。重启 Pi 后，确认可用工具包含 `web_search`、`fetch_content`、`get_search_content` 与 `source_check`。
 
-不要把 `pi-web-access` 加入本仓库的 `package.json`：Pi 从 `.pi/settings.json` 加载项目 package，不会自动加载 npm 的传递依赖。`.pi/` 是本地状态，保持由 Git 忽略。
+只保留全局一处：同一 package 同时出现在用户设置和项目 `.pi/settings.json` 时，project 条目会覆盖全局条目（除非 project 条目带 `autoload: false`），导致全局那份不生效，两份还会各自漂移到不同版本。
+
+不要把 `pi-web-access` 加入本仓库的 `package.json`：Pi 从设置文件加载 package，不会自动加载 npm 的传递依赖。`.pi/` 是本地状态，保持由 Git 忽略。
 
 ## 全局 provider 配置
 
 网页搜索 provider 设置存放在 `~/.pi/agent/web-search.json`。该文件是用户本地配置，不提交到 Git；它对每个加载 `pi-web-access` 的项目生效。
+
+路径带版本差异：`0.29.0` 起默认读这里，`0.28.0` 及更早读 `~/.pi/web-search.json`，且未设置 `XDG_CONFIG_HOME` 时**不会**回退到旧路径。从 `0.28.x` 升级后需要把该文件迁移过来，否则密钥静默失效。
 
 最小配置保留上游的自动路由：
 
