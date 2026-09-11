@@ -12,5 +12,5 @@
     "allowImportingTsExtensions": true
   },
   "include": ["extensions/**/*.ts", "types/**/*.d.ts"],
-  "exclude": ["extensions/pi-mcp-adapter/**"]
+  "exclude": ["extensions/pi-mcp-adapter/**", "extensions/pi-subagents/**"]
 }
