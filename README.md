@@ -31,6 +31,12 @@ MCP config is read from project-level `.mcp.json` and global `~/.config/mcp/mcp.
 | --- | --- |
 | [pi-web-access integration](docs/pi-web-access.md) (upstream [nicobailon/pi-web-access](https://github.com/nicobailon/pi-web-access)) | Load web search and content fetching tools in the current Pi project scope |
 
+### Global package
+
+| Package | Purpose |
+| --- | --- |
+| [open-tui configuration](docs/open-tui.md) (upstream [OldSuns/pi-open-tui](https://github.com/OldSuns/pi-open-tui) v0.3.5) | Header, footer, framed editor and per-turn telemetry for the Pi TUI; every option lives in `~/.pi/agent/open-tui.json` |
+
 ### Skills
 
 | Skill | Purpose |

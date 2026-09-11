@@ -31,6 +31,12 @@ MCP 配置读取项目级 `.mcp.json` 与全局 `~/.config/mcp/mcp.json`（兼�
 | --- | --- |
 | [pi-web-access 集成](docs/pi-web-access.md)（上游 [nicobailon/pi-web-access](https://github.com/nicobailon/pi-web-access)） | 在当前 Pi project scope 中加载网页搜索与内容读取工具 |
 
+### Global package
+
+| Package | 用途 |
+| --- | --- |
+| [open-tui 配置](docs/open-tui.md)（上游 [OldSuns/pi-open-tui](https://github.com/OldSuns/pi-open-tui) v0.3.5） | Pi TUI 的 header、footer、圆角 editor 与每轮 telemetry；可配置项都在 `~/.pi/agent/open-tui.json` |
+
 ### Skills
 
 | Skill | 用途 |
